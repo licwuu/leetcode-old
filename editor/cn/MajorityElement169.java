@@ -7,16 +7,12 @@ public class MajorityElement169 {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        //  Boyer-Moore投票算法, 上一次提交的代码结构优化
         public int majorityElement(int[] nums) {
-            int ans = nums[0], cnt = 1;
-            for (int i = 1; i < nums.length; i++) {
-                if (nums[i] == ans) cnt++;
-                else if (cnt == 0) {
-                    ans = nums[i];
-                    cnt = 1;
-                } else {
-                    cnt--;
-                }
+            int ans = 0, cnt = 0;
+            for (int num : nums) {
+                if (cnt == 0) ans = num;
+                cnt += ((ans == num) ? 1 : -1);
             }
             return ans;
         }
