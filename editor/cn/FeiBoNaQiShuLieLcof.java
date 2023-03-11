@@ -1,4 +1,4 @@
-package com.licw.leetcode.editor.cn;
+package editor.cn;
 
 public class FeiBoNaQiShuLieLcof{
     public static void main(String[] args) {
