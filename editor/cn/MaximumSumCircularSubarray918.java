@@ -1,30 +1,41 @@
 package editor.cn;
 
+import java.util.Arrays;
+
 public class MaximumSumCircularSubarray918 {
     public static void main(String[] args) {
         Solution solution = new MaximumSumCircularSubarray918()
                 .new Solution();
+        solution.maxSubarraySumCircular(new int[]{
+                -3, -2, -3
+        });
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+
         public int maxSubarraySumCircular(int[] nums) {
-            int len = nums.length;
-            // 找最小值
-            int minValue = nums[0], minValueIndex = 0;
-            for (int i = 1; i < len; i++) {
-                if (nums[i] < minValue) {
-                    minValue = nums[i];
-                    minValueIndex = i;
-                }
+            int sum = Arrays.stream(nums).sum();
+            int max = findMax(nums);
+            int min = findMin(nums);
+            return max > 0 ? Math.max(max, sum - min) : max;
+        }
+
+        int findMin(int[] nums) {
+            int minSum = nums[0], sum = 0;
+            for (int num : nums) {
+                sum = Math.min(sum, 0) + num;
+                minSum = Math.min(sum, minSum);
             }
-            // 从最小值对应的下标开始遍历数组
-            int maxSum = minValue, sum = 0;
-            for (int i = minValueIndex; i < len + minValueIndex; i++) {
-                sum = Math.max(sum, 0) + nums[i % len];
+            return minSum;
+        }
+
+        int findMax(int[] nums) {
+            int maxSum = nums[0], sum = 0;
+            for (int num : nums) {
+                sum = Math.max(sum, 0) + num;
                 maxSum = Math.max(sum, maxSum);
             }
-
             return maxSum;
         }
     }
