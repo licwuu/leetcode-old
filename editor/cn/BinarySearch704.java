@@ -9,13 +9,13 @@ public class BinarySearch704 {
     class Solution {
         public int search(int[] nums, int target) {
             int l = 0, r = nums.length - 1;
-            while (l < r){
+            while (l <= r) {
                 int m = (l + r) / 2;
-                if(nums[m] == target){
+                if (nums[m] == target) {
                     return m;
-                }else if(nums[m] < target){
+                } else if (nums[m] < target) {
                     l = m + 1;
-                }else {
+                } else {
                     r = m - 1;
                 }
             }
